@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+</head>
+<body>
+    <h1>Employee Form</h1>
+
+    <form th:action="@{/employees/save}"
+          th:object="${employee}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div>
+            <label>Full Name:</label>
+            <input type="text" th:field="*{fullName}" required>
+            <span th:if="${#fields.hasErrors('fullName')}"
+                  th:errors="*{fullName}"></span>
+        </div>
+
+        <div>
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" required>
+            <span th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}"></span>
+        </div>
+
+        <div>
+            <label>Phone:</label>
+            <input type="text" th:field="*{phone}" required>
+            <span th:if="${#fields.hasErrors('phone')}"
+                  th:errors="*{phone}"></span>
+        </div>
+
+        <div>
+            <label>Department:</label>
+            <input type="text" th:field="*{department}" required>
+            <span th:if="${#fields.hasErrors('department')}"
+                  th:errors="*{department}"></span>
+        </div>
+
+        <div>
+            <label>Salary:</label>
+            <input type="number" step="0.01" min="0.01"
+                   th:field="*{salary}" required>
+            <span th:if="${#fields.hasErrors('salary')}"
+                  th:errors="*{salary}"></span>
+        </div>
+
+        <button type="submit">Save Employee</button>
+    </form>
+
+    <a th:href="@{/}">Back to Employee List</a>
+</body>
+</html>
