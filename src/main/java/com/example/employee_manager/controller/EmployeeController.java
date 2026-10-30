@@ -9,13 +9,10 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class EmployeeController {
@@ -26,87 +23,91 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    // Display all employees
-    @GetMapping("/")
-    public String listEmployees(Model model) {
+    // Display all employees or search by name
+    @GetMapping({"/", "/employees"})
+    public String listEmployees(
+            @RequestParam(required = false) String keyword,
+            Model model) {
 
-        model.addAttribute(
-                "employees",
-                employeeService.getAllEmployees()
-        );
+        List<Employee> employees;
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+            employees = employeeService.getAllEmployees();
+        } else {
+            employees = employeeService.searchEmployees(keyword.trim());
+        }
+
+        model.addAttribute("employees", employees);
+        model.addAttribute("keyword", keyword);
 
         return "employees";
     }
 
-    // Display create employee form
+    // Show new employee form
     @GetMapping("/employees/new")
-    public String showCreateForm(Model model) {
+    public String showNewEmployeeForm(Model model) {
 
         model.addAttribute("employee", new Employee());
 
         return "employee-form";
     }
 
-    // Save or Update employee
+    // Save or update employee
     @PostMapping("/employees/save")
     public String saveEmployee(
             @Valid @ModelAttribute("employee") Employee employee,
             BindingResult result,
             RedirectAttributes redirectAttributes) {
 
-        // Check duplicate email
-        if (employeeService.emailExists(
-                employee.getEmail(),
-                employee.getId())) {
-
-            result.rejectValue(
-                    "email",
-                    "duplicate",
-                    "This email address is already registered."
-            );
-        }
-
         // Check validation errors
         if (result.hasErrors()) {
             return "employee-form";
         }
 
-        // Check whether employee is new or existing
-        boolean isUpdate = employee.getId() != null;
+        // Check duplicate email
+        if (employeeService.emailExists(
+                employee.getEmail(), employee.getId())) {
 
-        // Save employee details
-        employeeService.saveEmployee(employee);
-
-        // Display success message
-        if (isUpdate) {
-
-            redirectAttributes.addFlashAttribute(
-                    "successMessage",
-                    "Employee updated successfully!"
+            result.rejectValue(
+                    "email",
+                    "duplicate",
+                    "This email is already registered"
             );
 
-        } else {
+            return "employee-form";
+        }
 
+        boolean isNewEmployee = employee.getId() == null;
+
+        employeeService.saveEmployee(employee);
+
+        if (isNewEmployee) {
             redirectAttributes.addFlashAttribute(
                     "successMessage",
                     "Employee saved successfully!"
+            );
+        } else {
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "Employee updated successfully!"
             );
         }
 
         return "redirect:/";
     }
 
-    // Display edit employee form
+    // Show edit form
     @GetMapping("/employees/edit/{id}")
-    public String showEditForm(
+    public String editEmployee(
             @PathVariable Long id,
             Model model) {
 
         Employee employee = employeeService
                 .getEmployeeById(id)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Invalid employee Id: " + id
-                ));
+                .orElseThrow(() ->
+                        new IllegalArgumentException(
+                                "Invalid employee ID: " + id
+                        ));
 
         model.addAttribute("employee", employee);
 

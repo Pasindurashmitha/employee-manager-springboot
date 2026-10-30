@@ -1,152 +1,209 @@
 
+/* General Page */
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f3f5f9;
-    color: #263247;
-    margin: 0;
-    padding: 40px 20px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f7fc;
+    color: #263653;
+    padding: 35px 20px;
 }
 
+/* Main Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Main Heading */
 h1 {
     text-align: center;
-    color: #243b64;
+    font-size: 34px;
+    color: #1e3a6d;
     margin-bottom: 30px;
 }
 
-body > a {
+h2 {
+    font-size: 23px;
+    margin: 30px 0 18px;
+    color: #263653;
+}
+
+/* Add Employee Link */
+.add-button {
     display: inline-block;
     background: #2563eb;
     color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
     text-decoration: none;
-    padding: 11px 18px;
-    border-radius: 7px;
-    margin-bottom: 22px;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
-body > a:hover {
+.add-button:hover {
     background: #1d4ed8;
+}
+
+/* Search Section */
+form {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+form input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    padding: 13px 15px;
+    border: 1px solid #d5deeb;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+form input[type="text"]:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+form button {
+    padding: 13px 24px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #1d4ed8;
+}
+
+form a {
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+form a:hover {
+    color: #2563eb;
+}
+
+/* Employee Table */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 table {
     width: 100%;
+    min-width: 850px;
     border-collapse: collapse;
     background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+thead {
+    background: #1e3a6d;
+    color: white;
 }
 
 th {
-    background: #243b64;
-    color: white;
+    padding: 16px;
     text-align: left;
-    padding: 15px 12px;
+    font-size: 14px;
+    white-space: nowrap;
 }
 
 td {
-    padding: 13px 12px;
-    border-bottom: 1px solid #e5eaf2;
+    padding: 16px;
+    border-bottom: 1px solid #edf0f5;
+    font-size: 14px;
 }
 
 tbody tr:hover {
-    background: #f1f6ff;
+    background: #f5f8ff;
 }
 
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Table Action Links */
 td a {
     color: #2563eb;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 td a:hover {
     text-decoration: underline;
 }
 
-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 30px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-}
-
-form div {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #374151;
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
+/* Total Employees */
+p {
+    margin-top: 20px;
     font-size: 15px;
+    color: #64748b;
 }
 
-input:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+p span {
+    font-weight: 700;
+    color: #1e3a6d;
 }
 
-button {
-    width: 100%;
-    padding: 13px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 7px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #1d4ed8;
-}
-
-body > p {
+/* Success Message */
+.success-message {
     background: #dcfce7;
     color: #166534;
-    padding: 12px;
-    border-radius: 7px;
+    padding: 13px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
-@media (max-width: 700px) {
-    body {
-        padding: 20px 10px;
-    }
-
-    table {
-        font-size: 12px;
-    }
-
-    th, td {
-        padding: 8px 5px;
-    }
-}
+/* Form Validation Errors */
 .error-message {
     display: block;
-    color: red;
+    color: #dc2626;
     font-size: 14px;
-    font-weight: bold;
     margin-top: 6px;
 }
-.success-message {
-    background-color: #d1fae5;
-    color: #065f46;
-    padding: 12px;
-    margin: 15px 0;
-    border-radius: 5px;
-    font-weight: bold;
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    form {
+        flex-wrap: wrap;
+    }
+
+    form input[type="text"] {
+        flex-basis: 100%;
+    }
+
+    form button {
+        flex: 1;
+    }
 }
