@@ -1,0 +1,152 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f5f9;
+    color: #263247;
+    margin: 0;
+    padding: 40px 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #243b64;
+    margin-bottom: 30px;
+}
+
+body > a {
+    display: inline-block;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 7px;
+    margin-bottom: 22px;
+}
+
+body > a:hover {
+    background: #1d4ed8;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+th {
+    background: #243b64;
+    color: white;
+    text-align: left;
+    padding: 15px 12px;
+}
+
+td {
+    padding: 13px 12px;
+    border-bottom: 1px solid #e5eaf2;
+}
+
+tbody tr:hover {
+    background: #f1f6ff;
+}
+
+td a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+form div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #374151;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+body > p {
+    background: #dcfce7;
+    color: #166534;
+    padding: 12px;
+    border-radius: 7px;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px 5px;
+    }
+}
+.error-message {
+    display: block;
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+.success-message {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 5px;
+    font-weight: bold;
+}

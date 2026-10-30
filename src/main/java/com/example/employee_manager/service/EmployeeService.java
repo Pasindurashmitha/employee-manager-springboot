@@ -1,8 +1,5 @@
 package com.example.employee_manager.service;
 
-
-
-
 import com.example.employee_manager.model.Employee;
 import com.example.employee_manager.repository.EmployeeRepository;
 
@@ -28,6 +25,15 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
+    // Check whether the email is already used
+    public boolean emailExists(String email, Long id) {
+        if (id == null) {
+            return employeeRepository.existsByEmail(email);
+        }
+
+        return employeeRepository.existsByEmailAndIdNot(email, id);
+    }
+
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
@@ -36,4 +42,3 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 }
-
